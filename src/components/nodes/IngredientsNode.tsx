@@ -1,25 +1,36 @@
 import { useCallback } from "react";
-import { Handle, Node, NodeProps, Position } from "reactflow";
+import { Handle, NodeProps, Position } from "reactflow";
+import useStore, { RFState } from "../../store";
+import { shallow } from "zustand/shallow";
+import BaseNode from "./base/BaseNode";
+import NodeDataRow from "./base/NodeDataRow";
+import Ingredient from "../../models/ingredient";
 
-type NodeData = {
-  value: number;
-};
+const selector = (state: RFState) => ({
+  updateIngredientData: state.updateIngredientData,
+});
 
-type CustomNode = Node<NodeData>;
+const IngredientsNode = ({ id, data }: NodeProps<Ingredient>) => {
+  const { updateIngredientData } = useStore(selector, shallow);
 
-const IngredientsNode = ({ data }: NodeProps<NodeData>) => {
-  const onChange = useCallback((evt: any) => {
-    console.log(evt.target.value);
+  const onNameChange = useCallback((evt: any) => {
+    updateIngredientData(id, {
+      name: evt.target.value,
+    });
   }, []);
+
+  const onAmountChange = useCallback((evt: any) => {
+    updateIngredientData(id, {
+      amount: evt.target.value,
+    });
+  }, []);
+
   return (
-    <div>
-      <Handle type="target" position={Position.Top} />
-      <div>
-        <label htmlFor="text">Text:</label>
-        <input id="text" name="text" onChange={onChange} className="nodrag" />
-      </div>
-      <Handle type="source" position={Position.Bottom} id="a" />
-    </div>
+    <BaseNode title="Ingredient">
+      <NodeDataRow label="Name" value={data.name} onChange={onNameChange} />
+      <NodeDataRow label="Amount" type="number" value={data.amount} onChange={onAmountChange} />
+      <Handle type="source" position={Position.Right} id="a" />
+    </BaseNode>
   );
 };
 
