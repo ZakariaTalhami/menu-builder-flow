@@ -1,9 +1,8 @@
-import { Panel } from "reactflow";
-
 import { ThemeProvider } from "styled-components";
 import { darkTheme, lightTheme } from "./theme";
 import { useState } from "react";
 import Flow from "./flow";
+import ActionBar from "./components/panels/ActionBar";
 
 export default function App() {
   const [mode, setMode] = useState("light");
@@ -16,9 +15,7 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <Flow>
-        <Panel position="top-left">
-          <button onClick={toggleMode}>switch mode</button>
-        </Panel>
+        <ActionBar />
       </Flow>
     </ThemeProvider>
   );

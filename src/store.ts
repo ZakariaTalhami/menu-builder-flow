@@ -11,8 +11,9 @@ import {
   OnConnect,
   applyNodeChanges,
   applyEdgeChanges,
+  XYPosition,
 } from "reactflow";
-import Ingredient from "./models/ingredient";
+import Ingredient, { ingredientNodeGenerator } from "./models/ingredient";
 
 const initialNodes: Node[] = [
   { id: "1", type: "ingredient", position: { x: 0, y: 0 }, data: { name: "Tomato", amount: 2 } },
@@ -27,6 +28,7 @@ export type RFState = {
   onEdgesChange: OnEdgesChange;
   onConnect: OnConnect;
   updateIngredientData: (id: string, ingredientData: Partial<Ingredient>) => void;
+  addIngredientNode: (position: XYPosition) => void;
 };
 
 // this is our useStore hook that we can use in our components to get parts of the store and call actions
@@ -60,6 +62,12 @@ const useStore = create<RFState>((set, get) => ({
 
         return node;
       }),
+    });
+  },
+  addIngredientNode: (position) => {
+    const nodes = get().nodes;
+    set({
+      nodes: [...nodes, ingredientNodeGenerator(position)],
     });
   },
 }));
