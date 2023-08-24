@@ -2,10 +2,18 @@ export const lightTheme = {
     bg: '#fff',
     primary: '#ff0072',
   
-    nodeBg: '#f2f2f5',
-    nodeColor: '#222',
-    nodeBorder: '#222',
-  
+    node: {
+      bg: '#f2f2f5',
+      color: '#222',
+      border: '#222',
+    },
+
+    nodeHandle: {
+      color: "#f2f2f5",
+      hoverColor: "#c2c2c2",
+      borderColor: "#222",
+    },
+
     minimapMaskBg: '#f2f2f5',
   
     controlsBg: '#fefefe',
