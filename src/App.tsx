@@ -1,43 +1,25 @@
-import ReactFlow, {
-  MiniMap,
-  Controls,
-  Background,
-  BackgroundVariant
-} from 'reactflow';
-import { shallow } from 'zustand/shallow';
-import useStore, { RFState } from './store';
+import { Panel } from "reactflow";
 
-import 'reactflow/dist/style.css';
-
-
-const selector = (state: RFState) => ({
-  nodes: state.nodes,
-  edges: state.edges,
-  onNodesChange: state.onNodesChange,
-  onEdgesChange: state.onEdgesChange,
-  onConnect: state.onConnect,
-});
-
-
-
+import { ThemeProvider } from "styled-components";
+import { darkTheme, lightTheme } from "./theme";
+import { useState } from "react";
+import Flow from "./flow";
 
 export default function App() {
-  const { nodes, edges, onNodesChange, onEdgesChange, onConnect } = useStore(selector, shallow);
+  const [mode, setMode] = useState("light");
+  const theme = mode === "light" ? lightTheme : darkTheme;
+
+  const toggleMode = () => {
+    setMode((m) => (m === "light" ? "dark" : "light"));
+  };
 
   return (
-    <div style={{ width: '100vw', height: '100vh' }}>
-      <ReactFlow
-        nodes={nodes}
-        edges={edges}
-        onNodesChange={onNodesChange}
-        onEdgesChange={onEdgesChange}
-        onConnect={onConnect}
-        fitView
-      >
-        <Controls />
-        <MiniMap />
-        <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
-      </ReactFlow>
-    </div>
+    <ThemeProvider theme={theme}>
+      <Flow>
+        <Panel position="top-left">
+          <button onClick={toggleMode}>switch mode</button>
+        </Panel>
+      </Flow>
+    </ThemeProvider>
   );
 }
