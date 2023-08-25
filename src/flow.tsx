@@ -4,6 +4,7 @@ import useStore, { RFState } from "./store";
 
 import "reactflow/dist/style.css";
 import IngredientsNode from "./components/nodes/IngredientsNode";
+import RecipeNode from "./components/nodes/RecipeNode";
 
 const selector = (state: RFState) => ({
   nodes: state.nodes,
@@ -15,6 +16,7 @@ const selector = (state: RFState) => ({
 
 const nodeTypes: NodeTypes = {
   ingredient: IngredientsNode,
+  recipe: RecipeNode
 };
 
 function Flow({ children }: any) {

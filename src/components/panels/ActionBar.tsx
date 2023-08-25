@@ -2,6 +2,7 @@ import { Panel } from "reactflow";
 import styled from "styled-components";
 import ToggleThemeMode from "./Actions/ToggleThemeMode";
 import AddIngredientNode from "./Actions/AddIngredientNode";
+import AddRecipeNode from "./Actions/AddRecipeNode";
 
 const ActionBarContainer = styled(Panel)`
   display: flex;
@@ -19,6 +20,7 @@ const ActionBar = () => {
     <ActionBarContainer position="top-left">
       <ToggleThemeMode />
       <AddIngredientNode />
+      <AddRecipeNode />
     </ActionBarContainer>
   );
 };
