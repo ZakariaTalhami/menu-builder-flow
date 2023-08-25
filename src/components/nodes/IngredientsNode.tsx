@@ -10,7 +10,8 @@ const selector = (state: RFState) => ({
   updateIngredientData: state.updateIngredientData,
 });
 
-const IngredientsNode = ({ id, data }: NodeProps<Ingredient>) => {
+const IngredientsNode = (props: NodeProps<Ingredient>) => {
+  const {id, data} = props;
   const { updateIngredientData } = useStore(selector, shallow);
 
   const onNameChange = useCallback((evt: any) => {
@@ -26,7 +27,7 @@ const IngredientsNode = ({ id, data }: NodeProps<Ingredient>) => {
   }, []);
 
   return (
-    <BaseNode title="Ingredient">
+    <BaseNode title="Ingredient" {...props}>
       <NodeDataRow label="Name" value={data.name} onChange={onNameChange} />
       <NodeDataRow label="Amount" type="number" value={data.amount} onChange={onAmountChange} />
       <Handle type="source" position={Position.Right} id="a" />

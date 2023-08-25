@@ -2,15 +2,16 @@ import { ReactNode } from "react";
 import CustomNode from "./CustomNode";
 import NodeHeader from "./NodeHeader";
 import NodeBody from "./NodeBody";
+import { NodeProps } from "reactflow";
 
 type BaseNodeProps = {
   title: string;
   children: ReactNode;
 };
 
-function BaseNode({ title, children }: BaseNodeProps) {
+function BaseNode({ title, children, ...props }: BaseNodeProps & NodeProps) {
   return (
-    <CustomNode>
+    <CustomNode {...props}>
       <NodeHeader>{title}</NodeHeader>
       <NodeBody>{children}</NodeBody>
     </CustomNode>

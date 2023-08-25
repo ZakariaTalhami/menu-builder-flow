@@ -9,7 +9,8 @@ const selector = (state: RFState) => ({
   updateRecipeData: state.updateRecipeData,
 });
 
-const RecipeNode = ({ id, data }: NodeProps<Recipe>) => {
+const RecipeNode = (props: NodeProps<Recipe>) => {
+  const { id, data } = props;
   const { updateRecipeData } = useStore(selector);
 
   const onNameChange = useCallback((evt: any) => {
@@ -19,7 +20,7 @@ const RecipeNode = ({ id, data }: NodeProps<Recipe>) => {
   }, []);
 
   return (
-    <BaseNode title="Recipe">
+    <BaseNode title="Recipe" {...props}>
       <Handle type="target" position={Position.Left} id="a" />
       <NodeDataRow label="Name" value={data.name} onChange={onNameChange} />
     </BaseNode>
