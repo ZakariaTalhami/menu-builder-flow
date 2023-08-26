@@ -16,11 +16,9 @@ import {
 import Ingredient, { ingredientNodeGenerator } from "./models/ingredient";
 import Recipe, { recipeNodeGenerator } from "./models/recipe";
 
-const initialNodes: Node[] = [
-  { id: "1", type: "ingredient", position: { x: 0, y: 0 }, data: { name: "Tomato", amount: 2 } },
-];
+const initialNodes: Node[] = [];
 
-const initialEdges: Edge[] = [{ id: "e1-2", source: "1", target: "2" }];
+const initialEdges: Edge[] = [];
 
 export type RFState = {
   nodes: Node[];
