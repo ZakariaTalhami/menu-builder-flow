@@ -10,8 +10,12 @@ type BaseNodeProps = {
 };
 
 function BaseNode({ title, children, ...props }: BaseNodeProps & NodeProps) {
+  const baseProps = {
+    selected: props.selected
+  }
+  
   return (
-    <CustomNode {...props}>
+    <CustomNode {...baseProps}>
       <NodeHeader>{title}</NodeHeader>
       <NodeBody>{children}</NodeBody>
     </CustomNode>

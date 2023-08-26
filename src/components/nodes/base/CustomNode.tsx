@@ -1,7 +1,11 @@
 import { NodeProps } from "reactflow";
 import styled from "styled-components";
 
-const CustomNode = styled.div<NodeProps>`
+type CustomNodeProps = {
+  selected?: boolean;
+}
+
+const CustomNode = styled.div<CustomNodeProps>`
   border-radius: 5px;
   background: ${(props) => props.theme.node.bg};
   color: ${(props) => props.theme.node.color};
@@ -10,7 +14,7 @@ const CustomNode = styled.div<NodeProps>`
 
   .react-flow__handle {
     background: ${(props) => props.theme.nodeHandle.color};
-    width: 7px;
+    width: 7px;,
     height: 7px;
     border-radius: 7px;
     border: 1px solid
